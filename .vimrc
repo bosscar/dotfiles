@@ -79,7 +79,7 @@ set pheader=%<%f%h%m%40{strftime(\"%I:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}%=Page\ %N
 
 "Plugins
 set rtp+=~/.vim/autoload/plug.vim
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 
 Plug 'benmills/vimux'
 Plug 'vim-airline/vim-airline'
@@ -131,17 +131,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/TagHighlight'
 Plug 'ntpeters/vim-better-whitespace'
 
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/async.vim'
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
-" Plug 'thomasfaingnaert/vim-lsp-snippets'
-" Plug 'thomasfaingnaert/vim-lsp-neosnippet'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" let g:deoplete#enable_at_startup = 1
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vader.vim'
@@ -155,11 +144,6 @@ Plug 'vim-scripts/c.vim'
 Plug 'RRethy/vim-illuminate'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
-" let htools = '/pkg/qct/software/hexagon/releases/tools/8.2.04/Tools'
-" Plug 'valloric/youcompleteme', {'commit': 'e412ee465b91020faf1850eba11fd48cebd94604', \
-" 'do': 'EXTRA_CMAKE_ARGS=''-DUSE_CLANG_TIDY=ON, -DPATH_TO_LLVM_ROOT=' . htools . ' -DEXTRA_RPATH=' .\
-" htools . '/lib'' python3 install.py --clang-completer --rust-completer'}
 
 call plug#end()
 
@@ -176,10 +160,6 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-"ColorSceme
-" colorscheme base16-atelier-dune
-" colorscheme codedark
-" colorscheme abbott
 colorscheme tender
 
 nmap <F9> :NextColorScheme<cr>
@@ -266,7 +246,7 @@ inoremap :w <esc>:w<cr>
 vnoremap <c-s> <esc>:w<cr>
 
 "Ctrl-Q
-nnoremap <c-q> :cq<cr>
+nnoremap <c-q> :q<cr>
 
 "Ctrl-X
 nnoremap <c-x> :x<cr>
@@ -318,7 +298,6 @@ nmap <leader><space> a <Esc>h
 nmap <leader>m @@
 
 autocmd! InsertEnter * :if &readonly && confirm('File is read only. Open in Perforce for edit?', "&Yes\n&No", 1) == 1 | !p4 edit %
-" autocmd FileType c,h,cpp,cc setlocal spell spelllang=en_us
 
 "Doxygen comments
 nmap <leader>oo :Dox<cr>
@@ -342,9 +321,6 @@ vmap <leader>q[ xi[<cr><esc>pkdd
 
 nmap <leader>ss :28<cr>24dd:27<cr>Da<space><space>
 
-"Reload vimrc
-nnoremap <silent> <F5> <Esc>:so ~/.vimrc<cr>
-
 "Undo
 nnoremap U :redo<cr>
 nnoremap <silent> <F6> :UndotreeToggle<cr>
@@ -362,9 +338,6 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<cr>
 
 map <leader>j :call smooth_scroll#down(&scroll, 0, 5)<cr>
 map <leader>k :call smooth_scroll#up(&scroll, 0, 5)<cr>
-
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
 
 " move to beginning/end of line
 nnoremap B ^
@@ -455,10 +428,10 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-augroup myvimrchooks
-    au!
-    autocmd bufwritepost .vimrc source ~/.vimrc
-augroup END
+" augroup myvimrchooks
+"     au!
+"     autocmd bufwritepost .vimrc source ~/.vimrc
+" augroup END
 
 function! TrimWhiteSpace()
   %s/\s\+$//e
@@ -649,18 +622,6 @@ endif
 
 let g:ackprg = 'rg --vimgrep --no-heading'
 
-" vnoremap q <esc>:call QuickWrap("'")<cr>
-" vnoremap Q <esc>:call QuickWrap('"')<cr>
-
-" function! QuickWrap(wrapper)
-"   let l:w = a:wrapper
-"   let l:inside_or_around = (&selection == 'exclusive') ? ('i') : ('a')
-"   normal `>
-"   execute "normal " . inside_or_around . escape(w, '\')
-"   normal `<
-"   execute "normal i" . escape(w, '\')
-"   normal `<
-" endfunction
 
 vnoremap s <esc>:call StripWrap()<cr>
 
@@ -669,56 +630,3 @@ function! StripWrap()
 endfunction
 
 imap <c-f><c-g> <plug>(fzf-complete-line)
-
-" point vim-lsp to our C language server
-" if executable('clangd')
-"   au User lsp_setup call lsp#register_server({
-"         \ 'name': 'clangd',
-"         \ 'cmd': {server_info->['clangd', '--background-index', '-j=8']},
-"         \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-"         \ })
-" endif
-
-" let g:lsp_signs_enabled = 1           " enable signs
-" let g:lsp_diagnostics_echo_cursor = 1 " enable echo of diagnostic under cursor when in normal mode
-" let g:lsp_textprop_enabled = 1
-" let g:lsp_highlights_enabled = 1
-" let g:lsp_virtual_text_enabled = 0
-" makes all versions of symbol under cursor highlight as yellow
-" let g:lsp_highlight_references_enabled = 1
-" highlight lspReference ctermfg=yellow ctermbg=none
-
-
-"" Plugin key-mappings.
-"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-"" SuperTab like snippets behavior.
-"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-""imap <expr><TAB>
-"" \ pumvisible() ? "\<C-n>" :
-"" \ neosnippet#expandable_or_jumpable() ?
-"" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-"" For conceal markers.
-"if has('conceal')
-"  set conceallevel=2 concealcursor=niv
-"endif
-
-""------ asyncomplete.vim plugin options --------
-"let g:asyncomplete_auto_popup = 1                "makes the PUM pop up automatically as you type words
-"let g:asyncomplete_popup_delay = 1 "in ms        "sets the no-cursor-movement time-requirement before the PUM pops up
-
-"" ------ Completion Pop Up Menu (PUM) settings ------
-""makes text show up at cursor as you cycle through PUM options
-"set completeopt+=preview
-""makes tab cycle down through PUM options or open the PUM if not already open
-"inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : asyncomplete#force_refresh()
-""makes shift-tab cycle up through PUM options
-"inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-""makes <CR> (enter key) select the PUM item
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"

@@ -13,6 +13,7 @@ abbr celar clear
 abbr cls clear
 abbr x exit
 abbr t tree
+abbr tm tmux
 abbr l exa 
 abbr ll 'exa -lah'
 abbr v vim
@@ -30,8 +31,8 @@ alias .5="cd ../../../../.."
 alias .6="cd ../../../../../.."
 alias .7="cd ../../../../../../.."
 alias ls='~/bin/exa --group-directories-first'
-alias fzf='~/.fzf/bin/fzf'
-alias fzf-tmux='~/.fzf/bin/fzf-tmux'
+alias fzf='/usr/bin/fzf'
+alias fzf-tmux='/usr/bin/fzf-tmux'
 alias freeram='echo 3 | sudo tee /proc/sys/vm/drop_caches'
 
 export TERM=xterm-256color
