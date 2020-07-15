@@ -10,6 +10,7 @@ end
 
 abbr c clear
 abbr celar clear
+abbr fd fdfind
 abbr cls clear
 abbr x exit
 abbr t tree
