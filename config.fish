@@ -15,15 +15,22 @@ abbr cls clear
 abbr x exit
 abbr t tree
 abbr tm tmux
-abbr l exa 
+abbr l exa
 abbr ll 'exa -lah'
-abbr v vim
+abbr v nvim
+abbr vim nvim
 abbr h htop
 abbr go gotop
 abbr gl glances
-abbr rg ripgrep
-abbr frc 'vim ~/.config/fish/config.fish'
+abbr neo neofetch
+abbr pac 'sudo pacman'
+abbr pms 'yay -S'
+abbr pmr 'yay -S'
+abbr pmu 'yay -Syyu'
+abbr frc 'nvim ~/.config/fish/config.fish'
 abbr src 'source ~/.config/fish/config.fish'
+abbr trc 'source ~/.tmux.config'
+abbr vrc 'source ~/.vimrc'
 alias ..="cd .."
 alias .2="cd ../.."
 alias .3="cd ../../.."
@@ -40,10 +47,5 @@ export TERM=xterm-256color
 
 set PATH $PATH ~/.cargo/bin
 
-function swp
-  sudo apt update -y
-  sudo apt full-upgrade -y
-  sudo apt autoremove
-end
-
+neofetch
 if set -q TMUX; tmux setenv TMUXPWD_(tmux display -p "#D" | tr -d '%') $PWD; end
