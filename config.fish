@@ -25,7 +25,7 @@ abbr gl glances
 abbr neo neofetch
 abbr pac 'sudo pacman'
 abbr pms 'yay -S'
-abbr pmr 'yay -S'
+abbr pmr 'yay -R'
 abbr pmu 'yay -Syyu'
 abbr frc 'nvim ~/.config/fish/config.fish'
 abbr src 'source ~/.config/fish/config.fish'
@@ -38,7 +38,7 @@ alias .4="cd ../../../.."
 alias .5="cd ../../../../.."
 alias .6="cd ../../../../../.."
 alias .7="cd ../../../../../../.."
-alias ls='~/bin/exa --group-directories-first'
+alias ls='exa --group-directories-first'
 alias fzf='/usr/bin/fzf'
 alias fzf-tmux='/usr/bin/fzf-tmux'
 alias freeram='echo 3 | sudo tee /proc/sys/vm/drop_caches'
