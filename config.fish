@@ -47,5 +47,10 @@ export TERM=xterm-256color
 
 set PATH $PATH ~/.cargo/bin
 
+#Autoconnect bluetooth
+pulseaudio --start
+bluetoothctl connect FC:58:FA:58:BC:00
+clear
+
 neofetch
 if set -q TMUX; tmux setenv TMUXPWD_(tmux display -p "#D" | tr -d '%') $PWD; end
