@@ -10,7 +10,6 @@ end
 
 abbr c clear
 abbr celar clear
-abbr fd fdfind
 abbr cls clear
 abbr x exit
 abbr t tree
@@ -29,8 +28,8 @@ abbr pmr 'yay -R'
 abbr pmu 'yay -Syyu'
 abbr frc 'nvim ~/.config/fish/config.fish'
 abbr src 'source ~/.config/fish/config.fish'
-abbr trc 'source ~/.tmux.config'
-abbr vrc 'source ~/.vimrc'
+abbr vrc 'nvim ~/.config/nvim/init.vim'
+abbr trc 'nvim ~/.tmux.conf'
 alias ..="cd .."
 alias .2="cd ../.."
 alias .3="cd ../../.."
@@ -51,6 +50,5 @@ set PATH $PATH ~/.cargo/bin
 pulseaudio --start
 bluetoothctl connect FC:58:FA:58:BC:00
 clear
-
 neofetch
 if set -q TMUX; tmux setenv TMUXPWD_(tmux display -p "#D" | tr -d '%') $PWD; end
